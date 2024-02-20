@@ -8,7 +8,20 @@ import {
     View,
     Text
 } from 'react-native';
-function ToDoList(props) {
+
+
+function ToDoList({tasks = []}) {
+  const taskList = tasks.map((task, index) => {
+    return (
+      <Pressable key={index}>
+        <View style={[styles.task]}>
+          <Text style={styles.taskText}>{task}</Text>
+        </View>
+      </Pressable>
+    );
+  });
+
+
   return (
     <>
     <ScrollView>

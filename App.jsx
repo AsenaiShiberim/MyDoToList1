@@ -3,7 +3,8 @@
  *
  * @format
  */
-
+'use client';
+import { useState } from 'react';
 import React from 'react';
 import {
   SafeAreaView,
@@ -13,14 +14,20 @@ import ToDoList from './components/ToDoList';
 import ToDoForm from './components/ToDoForm';
 
 
-function App() {
+export default function App() {
+
+const [tasks, setTasks] = useState([
+    'Do laundry' ,
+    'Walk the dog' ,
+    'Go to the gym' 
+]);
+ 
   return (
     <SafeAreaView>
-      <ToDoList />
+      <ToDoList  task = {tasks}/>
       <ToDoForm />
     </SafeAreaView>
   );
 }
 
 
-export default App;
