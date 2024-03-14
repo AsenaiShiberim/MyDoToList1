@@ -8,23 +8,36 @@ import {
     TextInput,
     StyleSheet, 
     Button,
-    Pressable,
     View,
-    Text
 } from 'react-native';
 
-function ToDoForm(props) {
+function ToDoForm({addTask }) {
 
+  //const {addTask} = props;
   
+ // const = addTask = props.addTask;
 
+  const {input, setInput} = React.useState('');
+
+  const handleChangeText = text => {
+   setInput(text);
+
+  };
+  const handlePress = () => {
+    addTask(input);
+
+  };
   return (
     <>
     <View style={styles.form}>
         <TextInput
+
           style={styles.input}
           placeholder="Add a new task..."
+          onClickText={(handleChangeText)}
+          value={input}
         />
-        <Button title="Add" />
+        <Button title="Add" onPress={handlePress}/>
       </View>
     </>
   );
