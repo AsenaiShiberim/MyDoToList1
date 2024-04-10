@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import TASK from'../data/tasks.json';
 
 
 
@@ -18,6 +18,7 @@ function ToDoForm({addTask }) {
  // const = addTask = props.addTask;
 
   const {input, setInput} = React.useState('');
+  const {tasks, setTasks} = React.useState('');
 
   const handleChangeText = text => {
    setInput(text);
@@ -27,6 +28,25 @@ function ToDoForm({addTask }) {
     addTask(input);
 
   };
+
+  const handleAddTask = (task) => {
+    const randomIndex = Math.floor(Math.random() * tasks.length);
+    setTasks([...tasks.slice(0, randomIndex), task, ...tasks.slice(randomIndex)]);
+  };
+
+
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try{
+        setTasks(tasks);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchTasks();
+  }, []);
+
   return (
     <>
     <View style={styles.form}>
@@ -38,6 +58,7 @@ function ToDoForm({addTask }) {
           value={input}
         />
         <Button title="Add" onPress={handlePress}/>
+        <Button title="Add Random Task" onPress={handleAddTask}/>
       </View>
     </>
   );
